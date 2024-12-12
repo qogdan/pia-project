@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <title>Hello, world!</title>
+  </head>
+  <body>      
+
+      <nav class="navbar sticky-top navbar-expand-sm bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img src="../../assets/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+              DocMedic
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" routerLink="/patient">Profil</a>
+                <a class="nav-link"  routerLink="/patientlekari">Lekari</a>
+                <a class="nav-link"  routerLink="/patientpregledi">Pregledi</a>
+                <a class="nav-link" routerLink="/patientobavestenja">Obavestenja</a>
+                <form class="d-flex">
+                  <button (click)="logout()" class="btn btn-light" *ngIf="isAuth">Odjavi se</button>
+                </form>
+              </div>
+            </div>        
+          </div>
+      </nav>
+    <div class="container-xxl overflow-hidden">
+        <div class="row" id="section">
+            <div class="section-content">
+              <div class="row">
+                <div class="carousel-heading">
+                  <hr>
+                  <h1 class="heading-carousel" id="lekari-section">Zakazani pregledi</h1>
+                  <hr>
+                </div>
+              </div>
+              
+              <div class="tabela-doktora">
+                <div class="row">
+                  <div class="table-responsive">
+                    <table class="table table-hover" >
+                      <thead>
+                        <tr>
+                          <th scope="col">Naziv pregleda</th>
+                          <th scope="col" >Datum</th>
+                          <th scope="col" >Vreme</th>
+                          <th scope="col">Ogranak</th>
+                          <th scope="col">Lekar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let pregled of doctorObjects;" >
+                          <td>
+                              {{pregled.pregled.pregled.name}}
+                          </td>
+                          <td>
+                            {{getDate(pregled.pregled.timeStart)}}
+                          </td>
+                          <td>
+                            {{getTime(pregled.pregled.timeStart)}}
+                          </td>
+                          <td>
+                            {{pregled.doktor.branch}}
+                          </td>
+                          <td>
+                            {{pregled.doktor.firstname}} {{pregled.doktor.lastname}}
+                          </td>
+                          <td>
+                            <button type="submit" (click)="otkazi(pregled.pregled)" class="btn btn-primary">Otkazi pregled</button>
+
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <div class="row" id="section">
+            <div class="section-content">
+              <div class="row">
+                <div class="carousel-heading">
+                  <hr>
+                  <h1 class="heading-carousel" id="lekari-section">Izvestaji</h1>
+                  <hr>
+                </div>
+              </div>
+              
+              <div class="tabela-doktora">
+                <div class="row">
+                  <div class="table-responsive">
+                    <table class="table table-hover" >
+                      <thead>
+                        <tr>
+                          <th scope="col">Naziv pregleda</th>
+                          <th scope="col" >Datum</th>
+                          <th scope="col" >Vreme</th>
+                          <th scope="col">Razlog posete</th>
+                          <th scope="col">Dijagnoza</th>
+                          <th scope="col">Terapija</th>
+                          <th scope="col">Kontrola</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let i of docizvObj;" >
+                          <td>
+                              {{i.izvestaj.zakazani.pregled.name}}
+                          </td>
+                          <td>
+                            {{getDate(i.izvestaj.zakazani.timeEnd)}} {{getTime(i.izvestaj.zakazani.timeEnd)}}
+                          </td>
+                          <td>
+                            {{i.doktor.firstname}} {{i.doktor.lastname}}
+                          </td>
+                          <td>
+                            {{i.izvestaj.razlog}}
+                          </td>
+                          <td>
+                            {{i.izvestaj.dijagnoza}}
+                          </td>
+                          <td>
+                            {{i.izvestaj.terapija}}
+                          </td>
+                          <td>
+                            {{i.izvestaj.kontrola}}
+                          </td>
+                          
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-muted">© Elektrotehnički fakultet u Beogradu</span>
+      </div>
+    </footer>
+  </body>
+</html>
+

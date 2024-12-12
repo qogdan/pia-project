@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <title>Hello, world!</title>
+  </head>
+  <body>      
+
+      <nav class="navbar sticky-top navbar-expand-sm bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img src="../../assets/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+              DocMedic
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" routerLink="/doctor">Profil</a>
+                <a class="nav-link"  routerLink="/doctorpregledi">Pregledi</a>
+                <a class="nav-link"  routerLink="/doctorrazno">Razno</a>
+                <div class="d-flex">
+                  <button (click)="logout()" class="btn btn-light" *ngIf="isAuth">Odjavi se</button>
+                </div>
+              </div>
+            </div>        
+          </div>
+      </nav>
+    <div class="container-xxl overflow-hidden">
+      <div class="row" id="section">
+          <div class="section-content">
+            <div class="row">
+              <div class="carousel-heading">
+                <hr>
+                <h1 class="heading-carousel" id="lekari-section">Karton pacijenta</h1>
+                <hr>
+              </div>
+            </div>
+            <div class="row">
+              <form class="row g-3">
+                <div class="col-sm-3">
+                  <div class="profileimage">
+                    <img id="profileimage" src={{selected.avatar}} >
+                  </div>
+                </div>
+                <div class="col-sm-9">
+                  <table class="table table-striped-columns">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Ime</th>
+                        <td>
+                          <div >
+                            {{selected.firstname}}
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Prezime</th>
+                        <td>
+                          <div >
+                            {{selected.lastname}}
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Adresa</th>
+                        <td>
+                          <div >
+                            {{selected.address}}
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Kontakt telefon</th>
+                        <td>
+                          <div >
+                            {{selected.contact}}
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Email</th>
+                        <td>
+                          <div>
+                            {{selected.email}}
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>    
+            </div>
+            <div class="pregledi">
+              <div class="row">
+                <div class="carousel-heading">
+                  <hr>
+                  <h1 class="heading-carousel" id="lekari-section">Izveštaji sa pregleda</h1>
+                  <hr>
+                </div>
+              </div>
+              <div class="row">
+                <div class="table-responsive">
+                  <table class="table table-hover table-striped" >
+                    <thead>
+                      <tr>
+                        <th scope="col">Naziv pregleda</th>
+                        <th scope="col" >Datum</th>
+                        <th scope="col" >Vreme</th>
+                        <th scope="col">Razlog posete</th>
+                        <th scope="col">Dijagnoza</th>
+                        <th scope="col">Terapija</th>
+                        <th scope="col">Lekar</th>
+                      </tr>
+                    </thead>
+                    <tbody >
+                      <tr *ngFor="let i of izvestaji;" >
+                        <td>
+                            {{i.zakazani.pregled.name}}
+                        </td>
+                        <td>
+                          {{getDate(i.zakazani.timeEnd)}}
+                        </td>
+                        <td>
+                          {{getTime(i.zakazani.timeEnd)}}
+                        </td>
+                        <td>
+                          {{i.razlog}}
+                        </td>
+                        <td>
+                          {{i.dijagnoza}}
+                        </td>
+                        <td>
+                          {{i.terapija}}
+                        </td>
+                        <td>
+                          {{i.zakazani.doctor}}
+                        </td>
+                        
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-muted">© Elektrotehnički fakultet u Beogradu</span>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<form>
+    <div class="mb-3">
+      <label for="exampleInput1" class="form-label">Korisničko ime</label>
+      <input type="text" class="form-control" id="exampleInput1" aria-describedby="usernameHelp" [(ngModel)]="username" name="usernamee">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Lozinka</label>
+      <input type="password" [(ngModel)]="password" class="form-control" id="exampleInputPassword1" name="passworde">
+    </div>
+    <div class="redmessage">
+      {{message}}
+    </div>
+    <br>
+    <button type="submit" name="btn" (click)="login()" class="btn btn-primary">Uloguj se</button>
+    <br>
+    <br>
+    <a routerLink="/managerlogin">Prijava za menadžere</a>
+</form>

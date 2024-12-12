@@ -1,0 +1,113 @@
+html{
+    scroll-behavior: smooth;
+    
+}
+.carousel-item > img {
+    width:100%;
+    height: 55vh;
+}
+
+body{
+    background-color: rgba(249,249,249,1) !important;
+    font-family: Montserrat,sans-serif;
+    font-size: calc(14px + 2 * ((100vw - 320px)/ 1920));
+    line-height: 1.6;
+}
+#content-wrap{
+    padding-bottom: 2.5rem;
+}
+#footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:2.5rem;
+}
+.navbar{
+    background-color: #ffffff;
+    border-bottom:1px solid #c2c2c2;
+    /* height: 80px; */
+}
+#section{
+    padding:3vw;
+    
+}
+table{
+    text-align: center;
+}
+#carousel{
+    padding:0 1.5vw 1.5vh 1.5vw;
+}
+.section-content{
+    padding:1vw;
+    /* text-align: center; */
+    box-shadow: 3px 3px 20px rgba(0,0,0,.05);
+    background-color:#f8f9fa;
+}
+.o-nama{
+    text-align: center;
+}
+.tabela-doktora{
+    text-align:center;
+}
+.carousel-heading{
+    text-align: center;
+    color:#a2001d;
+}
+.heading-carousel{
+    font-size: calc(18px + 15 * ((100vw - 320px)/ 1920));
+    line-height: 1.2;
+    font-weight: bold;
+}
+
+#login-section{
+    outline: auto;
+}
+
+#mid-line{
+    background: linear-gradient(#c2c2c2, #c2c2c2) no-repeat center/1px 100%;
+}
+
+#login-text-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#holdpfp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#doctor-profile-picture{
+    width: 100px;
+    height: auto;
+}
+#profileimage{
+    max-width: 300px;
+    max-height: 300px;
+    width:100%;
+    height: auto;
+}
+
+td{
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+}
+th{
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+#manlogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.upload {
+    cursor: pointer;
+}
+.redmessage{
+    color:red;
+}

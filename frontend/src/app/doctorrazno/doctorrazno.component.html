@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <title>Hello, world!</title>
+  </head>
+  <body>      
+    <nav class="navbar sticky-top navbar-expand-sm bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="../../assets/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+          DocMedic
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" routerLink="/doctor">Profil</a>
+            <a class="nav-link"  routerLink="/doctorpregledi">Pregledi</a>
+            <a class="nav-link" routerLink="/doctorrazno">Razno</a>
+            <div class="d-flex">
+              <button (click)="logout()" class="btn btn-light" *ngIf="isAuth">Odjavi se</button>
+            </div>
+          </div>
+        </div>        
+      </div>
+    </nav>
+    <div class="container-xxl overflow-hidden">
+      <div class="row" id="section">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+
+          <div class="section-content">
+            <div class="row">
+              <div class="carousel-heading">
+                <hr>
+                <h1 class="heading-carousel" id="lekari-section">Novi pregled</h1>
+                Pošaljite zahtev za novi pregled
+                <hr>
+              </div>
+            </div>
+            <div class="row">
+  
+            <form [formGroup]="form" (submit)="posaljiZahtevPregled()" class="row g-3">
+              <div class="col-md-4">
+                <label for="inputUsername" class="form-label">Naziv pregleda</label>
+                <input type="text" formControlName="name" placeholder="Naziv pregleda" class="form-control" id="inputnamepregled">
+              </div>    
+              <div class="col-md-4">
+                <label for="inputUsername" class="form-label">Trajanje</label>
+                <input type="text" formControlName="duration" placeholder="Trajanje u minutima" class="form-control" id="inputduration">
+              </div>    
+              <div class="col-md-4">
+                <label for="inputUsername" class="form-label">Cena</label>
+                <input type="text" formControlName="price" placeholder="Cena u dinarima" class="form-control" id="inputprice">
+              </div>        
+              <div class="col-1">
+                <button type="submit" class="btn btn-primary">Posalji</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-sm-2"></div>
+      </div>
+    </div>
+    </div>
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-muted">© Elektrotehnički fakultet u Beogradu</span>
+      </div>
+    </footer>
+  </body></html>

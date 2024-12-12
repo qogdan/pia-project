@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <title>Hello, world!</title>
+  </head>
+  <body>      
+
+      <nav class="navbar sticky-top navbar-expand-sm bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img src="../../assets/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+              DocMedic
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" routerLink="/patient">Profil</a>
+                <a class="nav-link"  routerLink="/patientlekari">Lekari</a>
+                <a class="nav-link"  routerLink="/patientpregledi">Pregledi</a>
+                <a class="nav-link" routerLink="/patientobavestenja">Obavestenja</a>
+                <div class="d-flex">
+                  <button (click)="logout()" class="btn btn-light" *ngIf="isAuth">Odjavi se</button>
+                </div>
+              </div>
+            </div>        
+          </div>
+      </nav>
+    <div class="container-xxl overflow-hidden">
+        <div class="row" id="section">
+            <div class="section-content">
+              <div class="row">
+                <div class="carousel-heading">
+                  <hr>
+                  <h1 class="heading-carousel" id="lekari-section">Naši lekari</h1>
+                  <hr>
+                </div>
+              </div>
+              <div class="search-param">
+                <div class="buttons">
+                  <button (click)="searchToggle()" class="btn btn-light">Pretraga lekara</button>
+                  <button (click)="searchDoctors()" class="btn btn-danger" *ngIf="searchOpen">Pretraži</button>
+                </div>
+                <hr>
+                <div class="row g-2" *ngIf="searchOpen">
+                  <div class="col-1"></div>
+                  <div class="col-10">
+                    <div class="row g-2">
+                      <div class="col-12 col-sm-6 col-md-4" >
+                        <div class="input-group">
+                          <span class="input-group-text">Ime</span>
+                          <input type="text" name="is" [(ngModel)]="imeParam" aria-label="First name" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6 col-md-4">
+                        <div class="input-group">
+                          <span class="input-group-text">Prezime</span>
+                          <input type="text" aria-label="Last name" name="ps" [(ngModel)]="prezimeParam" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <div class="input-group">
+                          <span class="input-group-text">Specijalizacija</span>
+                          <input type="text" aria-label="Spec name" name="ss" [(ngModel)]="specParam" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <div class="input-group">
+                          <span class="input-group-text">Ogranak</span>
+                          <input type="text" aria-label="Spec name" name="ss" [(ngModel)]="branchParam" class="form-control">
+                        </div>
+                      </div>
+        
+                    </div>
+                  </div>
+                  <div class="col-1"></div>
+                </div>
+                <hr>
+              </div>
+              <div class="tabela-doktora">
+                <div class="row">
+                  <div class="table-responsive">
+                    <table class="table table-hover" >
+                      <thead>
+                        <tr>
+                          <th scope="col"></th>
+                          <th scope="col" (click)="sortIme()">Ime</th>
+                          <th scope="col" (click)="sortPrezime()">Prezime</th>
+                          <th scope="col" (click)="sortSpec()">Specijalizacija</th>
+                          <th scope="col" (click)="sortOgranak()">Ogranak</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let doctor of allDoctors" (click)="gotoDoctorCard(doctor)">
+                          <td>
+                            <img *ngIf="doctor.avatar!=null" src="{{doctor.avatar}}" alt="..." id="doctor-profile-picture">
+                            <img *ngIf="doctor.avatar==null" src="../../assets/profilne/doctor-placeholder.jpg" alt="..." id="doctor-profile-picture">
+      
+                          </td>
+                          <td>
+                              {{doctor.firstname}}
+                            
+                          </td>
+                          <td>
+                            {{doctor.lastname}}
+                          </td>
+                          <td>
+                            {{doctor.spec}}
+                          </td>
+                          <td>
+                            {{doctor.branch}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-muted">© Elektrotehnički fakultet u Beogradu</span>
+      </div>
+    </footer>
+  </body>
+</html>
+

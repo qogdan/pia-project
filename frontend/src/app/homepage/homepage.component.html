@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <title>Hello, world!</title>
+  </head>
+  <body>      
+
+      <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img src="../../assets/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+              DocMedic
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                
+                <a class="nav-link active" aria-current="page" href="/homepage">Naslovna</a>
+                <a class="nav-link" href="/homepage#o-nama">O nama</a>
+                <a class="nav-link" href="homepage#prijavaregistracija">Prijava</a>
+                <a class="nav-link" href="homepage#lekari-section">Lekari</a>
+                <a class="nav-link active" *ngIf="isAuth" aria-current="page" routerLink="/{{role}}">Profil</a>
+                <div class="d-flex" >
+                  <button (click)="logout()" class="btn btn-outline-danger" *ngIf="isAuth">Odjavi se</button>
+                </div>
+              </div>
+            </div>        
+          </div>
+      </nav>
+    <div class="container-xxl overflow-hidden">
+      <div class="row" id="section">
+        <div class="section-content">
+            <div class="row">
+                <div class="carousel-heading">
+                  <hr>
+                    <h1 class="heading-carousel">Dobrodošli u DocMedic</h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+              <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="../../assets/p1.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="../../assets/p2.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="../../assets/p3.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="../../assets/p4.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                      <img src="../../assets/p5.jpg" class="d-block w-100" alt="...">
+                    
+                    </div>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+              </div>
+            </div>
+        </div>  
+      </div>
+      <div class="row" id="section">
+        <div class="section-content">
+          <div class="prijavaregistracija" id="prijavaregistracija">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Prijava</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Registracija</button>
+              </li>   
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                <div class="row g-4">
+                  <div class="col-sm-1 d-none d-sm-block d-md-none"></div>
+                  <div class="col-sm-10 col-md-6 col-lg-4 o-nama">
+                    <h3 class="heading-carousel">Prijava</h3>
+                    <app-login></app-login> 
+                  </div>
+                  <div class="col-sm-1 d-none d-sm-block d-md-none"></div>
+                  <div class="col-md-6 col-lg-8">
+                    <div class="o-nama" id="o-nama">
+                      <div class="row g-4">
+                          <div>
+                            <h3  class="heading-carousel">O nama</h3>  
+                            "DocMedic" je moderno opremljena opšta bolnica posvećena zdravlju, prevenciji i lečenju svojih pacijenata, sa fokusom da se pruže stručni i individualizovani tretmani. Prateći nove metodologije i koristeći savremenu medicinsku opremu, omogućene su kompletne usluge prema najvišim evropskim i svetskim standardima.
+                            <br>
+                            Izuzetnu brigu o pacijentu omogućavaju vodeći lekari i kvalifikovano medicinsko osoblje. Najbolji rezultat su hiljade zadovoljnih pacijenata i velika reputacija u našoj državi i u Evropi. U "DocMedic" ćemo odgovoriti na Vaša pitanja i pružiti tretman koji Vam je potreban, sve u cilju da se što pre osećate dobro i vratite uobičajenim aktivnostima.
+                          </div>
+                      </div>   
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <app-register></app-register>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="section">
+        <div class="section-content">
+          <div class="row">
+            <div class="carousel-heading">
+              <hr>
+              <h1 class="heading-carousel" id="lekari-section">Naši lekari</h1>
+              <hr>
+            </div>
+          </div>
+          <div class="search-param">
+            <div class="buttons">
+              <button (click)="searchToggle()" class="btn btn-light">Pretraga lekara</button>
+              <button (click)="searchDoctors()" class="btn btn-danger" *ngIf="searchOpen">Pretraži</button>
+            </div>
+            <hr>
+            <div class="row g-2" *ngIf="searchOpen">
+              <div class="col-1"></div>
+              <div class="col-10">
+                <div class="row g-2">
+                  <div class="col-12 col-sm-6 col-md-4" >
+                    <div class="input-group">
+                      <span class="input-group-text">Ime</span>
+                      <input type="text" name="is" [(ngModel)]="imeParam" aria-label="First name" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6 col-md-4">
+                    <div class="input-group">
+                      <span class="input-group-text">Prezime</span>
+                      <input type="text" aria-label="Last name" name="ps" [(ngModel)]="prezimeParam" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <div class="input-group">
+                      <span class="input-group-text">Specijalizacija</span>
+                      <input type="text" aria-label="Spec name" name="ss" [(ngModel)]="specParam" class="form-control">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-1"></div>
+            </div>
+            <hr>
+          </div>
+          <div class="tabela-doktora">
+            <div class="row">
+              <div class="table-responsive">
+                <table class="table" >
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col" (click)="sortIme()">Ime</th>
+                      <th scope="col" (click)="sortPrezime()">Prezime</th>
+                      <th scope="col" (click)="sortSpec()">Specijalizacija</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let doctor of allDoctors">
+                      <td>
+                        <img *ngIf="doctor.avatar!=null" src={{doctor.avatar}} alt="..." id="doctor-profile-picture">
+                        <img *ngIf="doctor.avatar==null" src="../../assets/profilne/doctor-placeholder.jpg" alt="..." id="doctor-profile-picture">
+                      </td>
+                      <td>
+                          {{doctor.firstname}}
+                        
+                      </td>
+                      <td>
+                        {{doctor.lastname}}
+                      </td>
+                      <td>
+                        {{doctor.spec}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+      </a>
+      <span class="mb-3 mb-md-0 text-muted">© Elektrotehnički fakultet u Beogradu</span>
+    </div>
+  </footer>
+
+  </body>
+</html>

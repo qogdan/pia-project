@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <title>Hello, world!</title>
+  </head>
+  <body>      
+    <div class="row">
+
+      <nav class="navbar sticky-top navbar-expand-sm bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img src="../../assets/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+              DocMedic
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" routerLink="/patient">Profil</a>
+                <a class="nav-link"  routerLink="/patientlekari">Lekari</a>
+                <a class="nav-link"  routerLink="/patientpregledi">Pregledi</a>
+                <a class="nav-link" routerLink="/patientobavestenja">Obavestenja</a>
+                <div class="d-flex">
+                  <button (click)="logout()" class="btn btn-light" *ngIf="isAuth">Odjavi se</button>
+                </div>
+              </div>
+            </div>        
+          </div>
+      </nav>
+    </div>
+    <div class="container-xxl overflow-hidden">
+      <div class="section-content">
+        <div class="row">
+          <div class="carousel-heading">
+            <hr>
+            <h1 class="heading-carousel" id="lekari-section">Nova obaveštenja</h1>
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="table-responsive">
+            <div *ngIf="obavestenja.length==0">
+              Nema novih obaveštenja.
+            </div>
+            <table class="table table-hover table-striped" *ngIf="obavestenja.length>0" >
+              <thead>
+                <th>Naslov</th>
+              </thead>
+              <tbody *ngFor="let o of obavestenja">
+                <tr>
+                  <td>
+                    {{naslov(o)}}
+                  </td>
+                  <td>
+                  </td>
+                  
+                  <td>
+                    <button class="btn btn-primary" (click)="read(o._id)"  type="button" data-bs-toggle="collapse" data-bs-target="#colapseID1" [attr.data-bs-target]="'#colapseID'+obavestenja.indexOf(o)" aria-expanded="false" aria-controls="collapseExample">
+                      Pročitaj obaveštenje
+                    </button>                     
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <div class="collapse" id={{colapseID+obavestenja.indexOf(o)}}>
+                      <div class="card card-body">
+                        {{o.text}}
+                        <div *ngIf="o.type=='otkazan'||o.type=='24h'">
+                          Datum i vreme pregleda:
+                          {{getDate(o.datetime)}} {{getTime(o.datetime)}}
+
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="section-content">
+        <div class="row">
+          <div class="carousel-heading">
+            <hr>
+            <h1 class="heading-carousel" id="lekari-section">Pročitana obaveštenja</h1>
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="table-responsive">
+            <div *ngIf="obavestenjaRead.length==0">
+              Nema pročitanih obaveštenja.
+            </div>
+            <table class="table table-hover table-striped" *ngIf="obavestenjaRead.length>0">
+              <thead>
+                <th>Naslov</th>
+              </thead>
+              <tbody *ngFor="let o of obavestenjaRead">
+                <tr >
+                  <td>
+                    {{naslov(o)}}
+                  </td>
+                  
+                  <td>
+                    <button class="btn btn-primary"  type="button" data-bs-toggle="collapse" data-bs-target="#colapseID1" [attr.data-bs-target]="'#colapseIDR'+obavestenjaRead.indexOf(o)" aria-expanded="false" aria-controls="collapseExample">
+                      Pročitaj obaveštenje
+                    </button>                     
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <div class="collapse" id={{colapseIDR+obavestenjaRead.indexOf(o)}}>
+                      <div class="card card-body">
+                        <div *ngIf="o.type=='otkazan'||o.type=='24h'">
+                          Datum i vreme pregleda: 
+                          {{getDate(o.datetime)}} {{getTime(o.datetime)}}
+                          
+                        </div>
+                        {{o.text}}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-muted">© Elektrotehnički fakultet u Beogradu</span>
+      </div>
+    </footer>
+  </body>
+</html>

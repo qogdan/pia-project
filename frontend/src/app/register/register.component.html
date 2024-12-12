@@ -1,0 +1,80 @@
+<form [formGroup]="form" (submit)="register()" class="row g-3">
+    <div class="col-md-6">
+      <label for="inputName" class="form-label">Ime</label>
+      <input type="text" formControlName="firstname" class="form-control" id="inputName">
+      <div id="passwordHelpBlock" *ngIf="wrongname" class="form-text redmessage">
+        Nekorektno ime.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="inputLastname" class="form-label">Prezime</label>
+      <input type="text" formControlName="lastname" class="form-control" id="InputLastname">
+      <div id="passwordHelpBlock" *ngIf="wronglastname" class="form-text redmessage">
+        Nekorektno prezime.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="inputUsername" class="form-label">Korisničko ime</label>
+      <input type="text" formControlName="username" class="form-control" id="inputUsername">
+      <div id="passwordHelpBlock" *ngIf="takenusername" class="form-text redmessage">
+        Korisničko ime je već u upotrebi.
+      </div>
+      <div id="passwordHelpBlock" *ngIf="wrongusername" class="form-text redmessage">
+        Nekorektno korisničko ime.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="inputEmail" class="form-label">Email</label>
+      <input type="email" formControlName="email" class="form-control" id="inputEmail">
+      <div id="passwordHelpBlock" *ngIf="wrongemail" class="form-text redmessage">
+        Nepostojeći email.
+      </div>
+      <div id="passwordHelpBlock" *ngIf="takenemail" class="form-text redmessage">
+        Email je već u upotrebi.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="inputPassword" class="form-label">Lozinka</label>
+      <input type="password" formControlName="password" class="form-control" id="inputPassword">
+    </div>
+    <div class="col-md-6">
+      <label for="inputPasswordconf" class="form-label">Potvrdi lozinku</label>
+      <input type="password" formControlName="passwordconf" class="form-control" id="inputPasswordconf">
+    </div>
+    <div id="passwordHelpBlock" *ngIf="wrongpassword" class="form-text redmessage">
+      Lozinka mora imati minimalno 8, a maksimalno 14 karaktera, barem jedno veliko slovo, jedan broj i jedan specijalni karakter, i mora počinjati slovom.
+      Dva susedna znaka ne smeju biti ista.  
+    </div>
+    <div id="passwordHelpBlock" *ngIf="notSame" class="form-text redmessage">
+      Unete lozinke se razlikuju.  
+    </div>
+    <div class="col-12">
+      <label for="inputAddress" class="form-label">Adresa</label>
+      <input type="text" formControlName="address" class="form-control" id="inputAddress" placeholder="Naziv ulice i broj">
+      <div id="passwordHelpBlock" *ngIf="wrongaddress" class="form-text redmessage">
+        Nekorektna adresa.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="inputContact" class="form-label">Kontakt telefon</label>
+      <input type="text" formControlName="phone" class="form-control" id="inputContact" placeholder="06xxxxxxx">
+      <div id="passwordHelpBlock" *ngIf="wrongnumber" class="form-text redmessage">
+        Nepostojeći broj telefona.
+      </div>
+    </div>
+    
+    <div class="col-md-12">
+      <div>
+          <span>
+            <input type="file" #filepicker (change)="PickedImage($event)">
+          </span>
+          
+      </div>
+  </div>
+  <div id="passwordHelpBlock" *ngIf="invalidform || wrongdata" class="form-text">
+    {{message}}
+  </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Registruj se</button>
+    </div>
+  </form>

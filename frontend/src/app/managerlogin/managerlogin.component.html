@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <title>Hello, world!</title>
+  </head>
+  <body>      
+          
+          <nav class="navbar navbar-expand-lg bg-body-tertiary">
+              <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="../../assets/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+              DocMedic
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                
+                <a class="nav-link active" aria-current="page" href="#">Naslovna</a>
+                <a class="nav-link" href="/homepage#o-nama">O nama</a>
+                <a class="nav-link" href="homepage#o-nama">Prijava</a>
+                <a class="nav-link" href="homepage#lekari-section">Lekari</a>
+                <a class="nav-link active" *ngIf="isAuth" aria-current="page" routerLink="/{{role}}">Profil</a>
+                <div class="d-flex" >
+                  <button (click)="logout()" class="btn btn-outline-danger" *ngIf="isAuth">Odjavi se</button>
+                </div>
+              </div>
+            </div>        
+          </div>
+      </nav>
+    <div class="container-xxl overflow-hidden" >
+        <div class="row" id="section">
+            <div class="col-sm-1 col-md-2 col-lg-3 col-xl-4" ></div>
+            <div class="col-sm-10 col-md-8 col-lg-6 col-xl-4">
+                <div class="section-content">
+                    <div class="row">
+                        <div class="carousel-heading">
+                            <h1 class="heading-carousel">Prijava za menadžere</h1>
+                        </div>
+                    </div>
+                    <div class="row g-4" id="manlogin">
+                        <form>
+                            <div class="mb-3">
+                              <label for="exampleInput1" class="form-label">Korisničko ime</label>
+                              <input type="text" class="form-control" id="exampleInput1" aria-describedby="usernameHelp" [(ngModel)]="username" name="usernamee">
+                            </div>
+                            <div class="mb-3">
+                              <label for="exampleInputPassword1" class="form-label">Lozinka</label>
+                              <input type="password" [(ngModel)]="password" class="form-control" id="exampleInputPassword1" name="passworde">
+                            </div>
+                            {{message}}
+                            <button type="submit" name="btn" (click)="login()" class="btn btn-primary">Uloguj se</button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1 col-md-2 col-lg-3 col-xl-4"></div>
+        </div>
+    </div>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+            <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-muted">© Elektrotehnički fakultet u Beogradu</span>
+        </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+        </ul>
+    </footer>
+  </body>
+</html>

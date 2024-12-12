@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+    <title>Hello, world!</title>
+  </head>
+  <body>      
+    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="../../assets/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+          DocMedic
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="/homepage">Naslovna</a>
+            <a class="nav-link" href="/manager#paci-section">Pacijenti</a>
+            <a class="nav-link" href="/manager#lekari-section">Lekari</a>
+            <a class="nav-link" href="/manager#zahr-section">Zahtevi za registraciju</a>
+            <a class="nav-link" href="/manager#preg-section">Zahtevi za preglede</a>
+            <a class="nav-link" href="/manager#rnl-section">Registracija novog lekara</a>
+            <a class="nav-link" href="/manager#spp-section">Specijalizacije i pregledi</a>
+            <div class="d-flex">
+              <button (click)="logout()" class="btn btn-light" *ngIf="isAuth">Odjavi se</button>
+            </div>
+          </div>
+        </div>        
+      </div>
+    </nav>
+    <div class="container-xxl overflow-hidden">
+      <div class="row" id="section">
+        <div class="section-content">
+          <div class="row">
+            <div class="carousel-heading">
+              <hr>
+              <h1 class="heading-carousel" id="paci-section">Svi pacijenti</h1>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="table-responsive">
+              <table class="table table-hover table-striped" >
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col" >Ime</th>
+                    <th scope="col" >Prezime</th>
+                    <th scope="col">Korisničko ime</th>
+                    <th scope="col">Adresa</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefon</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let p of allPatients">
+                  <tr>
+                    <td>
+                      <img *ngIf="p.avatar!=null" src="{{p.avatar}}" alt="..." id="doctor-profile-picture">
+                      <img *ngIf="p.avatar==null" src="../../assets/profilne/placeholder.jpg" alt="..d." id="doctor-profile-picture">
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateUsermode.length!=0?updateUsermode[allPatients.indexOf(p)]:false)">
+                        {{p.firstname}}
+                      </div>
+                      <input type="text" *ngIf="updateUsermode.length!=0?updateUsermode[allPatients.indexOf(p)]:false" value="{{p.firstname}}" placeholder="{{p.firstname}}"  [(ngModel)]="ufirstname" class="form-control" id="inputufn">
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateUsermode.length!=0?updateUsermode[allPatients.indexOf(p)]:false)">
+                        {{p.lastname}}
+                      </div>
+                      <input type="text" *ngIf="updateUsermode.length!=0?updateUsermode[allPatients.indexOf(p)]:false" value="{{p.lastname}}" placeholder="{{p.lastname}}"  [(ngModel)]="ulastname" class="form-control" id="inputuln">
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateUsermode.length!=0?updateUsermode[allPatients.indexOf(p)]:false)">
+                        {{p.username}}
+                      </div>
+                      <input type="text" *ngIf="updateUsermode.length!=0?updateUsermode[allPatients.indexOf(p)]:false" value="{{p.username}}" placeholder="{{p.username}}"  class="form-control" id="inputuun" disabled readonly>
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateUsermode.length!=0?updateUsermode[allPatients.indexOf(p)]:false)">
+                        {{p.address}}
+                      </div>
+                      <input type="text" *ngIf="updateUsermode.length!=0?updateUsermode[allPatients.indexOf(p)]:false" value="{{p.address}}" placeholder="{{p.address}}"  [(ngModel)]="uaddress" class="form-control" id="inputuad">
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateUsermode.length!=0?updateUsermode[allPatients.indexOf(p)]:false)">
+                        {{p.email}}
+                      </div>
+                      <input type="text" *ngIf="updateUsermode.length!=0?updateUsermode[allPatients.indexOf(p)]:false" value="{{p.email}}" placeholder="{{p.email}}"   class="form-control" id="inputuem" disabled readonly>
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateUsermode.length!=0?updateUsermode[allPatients.indexOf(p)]:false)">
+                        {{p.contact}}
+                      </div>
+                      <input type="text" *ngIf="updateUsermode.length!=0?updateUsermode[allPatients.indexOf(p)]:false" value="{{p.contact}}" placeholder="{{p.contact}}"  [(ngModel)]="ucontact" class="form-control" id="inputuct">
+                    </td>
+                    <td>
+                      <button  class="btn btn-primary" *ngIf="!updateUsermode[allPatients.indexOf(p)]"  type="button" (click)="delete(p)"> Obriši</button>
+                      <button  class="btn btn-primary" *ngIf="updateUsermode[allPatients.indexOf(p)]" type="button" (click)="updateUserModeM(allPatients.indexOf(p))"> Otkazi</button>
+                    </td>
+                    <td>
+                      <button  class="btn btn-primary"  *ngIf="updateUsermode[allPatients.indexOf(p)]" type="button" (click)="updateUser(p)"> Sacuvaj</button>
+                      <button  class="btn btn-primary" *ngIf="!updateUsermode[allPatients.indexOf(p)]"  type="button" (click)="updateUserMode(allPatients.indexOf(p))"> Azuriraj</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="section">
+        <div class="section-content">
+          <div class="row">
+            <div class="carousel-heading">
+              <hr>
+              <h1 class="heading-carousel" id="lekari-section">Svi lekari</h1>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="table-responsive">
+              <table class="table table-hover table-striped" >
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col" >Ime</th>
+                    <th scope="col" >Prezime</th>
+                    <th scope="col">Korisničko ime</th>
+                    <th scope="col">Adresa</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefon</th>
+                    <th scope="col">Licenca</th>
+                    <th scope="col">Specijalizacija</th>
+                    <th scope="col">Ogranak</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let p of allDoctors">
+                  <tr>
+                    <td>
+                      <img *ngIf="p.avatar!=null" src="{{p.avatar}}" alt="..." id="doctor-profile-picture">
+                      <img *ngIf="p.avatar==null" src="../../assets/profilne/doctor-placeholder.jpg" alt="..." id="doctor-profile-picture">
+
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false)">
+                        {{p.firstname}}
+                      </div>
+                      <input type="text" *ngIf="updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false" value="{{p.firstname}}" placeholder="{{p.firstname}}"  [(ngModel)]="dfirstname" class="form-control" id="inputdfn">
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false)">
+                        {{p.lastname}}
+                      </div>
+                      <input type="text" *ngIf="updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false" value="{{p.lastname}}" placeholder="{{p.lastname}}"  [(ngModel)]="dlastname" class="form-control" id="inputdln">
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false)">
+                        {{p.username}}
+                      </div>
+                      <input type="text" *ngIf="updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false" value="{{p.username}}" placeholder="{{p.username}}" [(ngModel)]="dusername"  class="form-control" id="inputdun" >
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false)">
+                        {{p.address}}
+                      </div>
+                      <input type="text" *ngIf="updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false" value="{{p.address}}" placeholder="{{p.address}}"  [(ngModel)]="daddress" class="form-control" id="inputdad">
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false)">
+                        {{p.email}}
+                      </div>
+                      <input type="text" *ngIf="updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false" value="{{p.email}}" placeholder="{{p.email}}" [(ngModel)]="demail"   class="form-control" id="inputdem" >
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false)">
+                        {{p.contact}}
+                      </div>
+                      <input type="text" *ngIf="updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false" value="{{p.contact}}" placeholder="{{p.contact}}"  [(ngModel)]="dcontact" class="form-control" id="inputdct">
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false)">
+                        {{p.licence}}
+                      </div>
+                      <input type="text" *ngIf="updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false" value="{{p.licence}}" placeholder="{{p.licence}}"  [(ngModel)]="dlicence" class="form-control" id="inputdli">
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false)">
+                        {{p.spec}}
+                      </div>
+                      <input type="text" *ngIf="updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false" value="{{p.spec}}" placeholder="{{p.spec}}"  [(ngModel)]="dspec" class="form-control" id="inputdsc">
+                    </td>
+                    <td>
+                      <div *ngIf="!(updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false)">
+                        {{p.branch}}
+                      </div>
+                      <input type="text" *ngIf="updateDocmode.length!=0?updateDocmode[allDoctors.indexOf(p)]:false" value="{{p.branch}}" placeholder="{{p.branch}}"  [(ngModel)]="dbranch" class="form-control" id="inputdbr">
+                    </td>
+                    <td>
+                      <button  class="btn btn-primary" *ngIf="!updateDocmode[allDoctors.indexOf(p)]"  type="button" (click)="delete(p)"> Obriši</button>
+                      <button  class="btn btn-primary" *ngIf="updateDocmode[allDoctors.indexOf(p)]" type="button" (click)="updateDocModeM(allDoctors.indexOf(p))"> Otkazi</button>
+                    </td>
+                    <td>
+                      <button  class="btn btn-primary"  *ngIf="updateDocmode[allDoctors.indexOf(p)]" type="button" (click)="updateDoc(p)"> Sacuvaj</button>
+                      <button  class="btn btn-primary" *ngIf="!updateDocmode[allDoctors.indexOf(p)]"  type="button" (click)="updateDocMode(allDoctors.indexOf(p))"> Azuriraj</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="section">
+        <div class="section-content">
+          <div class="row">
+            <div class="carousel-heading">
+              <hr>
+              <h1 class="heading-carousel" id="zahr-section">Zahtevi za registraciju pacijenata</h1>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="table-responsive">
+              <table class="table table-hover table-striped" >
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Ime</th>
+                    <th scope="col">Prezime</th>
+                    <th scope="col">Korisničko ime</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Adresa</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let reg of allRegisters">
+                    <td>
+                      <img *ngIf="reg.user.avatar!=null" src={{reg.user.avatar}} alt="..." id="doctor-profile-picture">
+                      <img *ngIf="reg.user.avatar==null" src="../../assets/profilne/placeholder.jpg" alt="..." id="doctor-profile-picture">
+
+                    </td>
+                    <td>
+                        {{reg.user.firstname}}
+                    </td>
+                    <td>
+                      {{reg.user.lastname}}
+                    </td>
+                    <td>
+                      {{reg.user.username}}
+                    </td>
+                    <td>
+                      {{reg.user.email}}
+                    </td>
+                    <td>
+                      {{reg.user.address}}
+                    </td>
+                    <td>
+                      {{reg.status}}
+                    </td>
+                    <td>
+                      <button type="submit" *ngIf="!allAccRejUsernamesEmails.includes(reg.user.username) || !allAccRejUsernamesEmails.includes(reg.user.email)" (click)="acceptRequest(reg)" name="btn"  class="btn btn-primary">
+                        Prihvati zahtev
+                      </button>
+                      <button type="submit" (click)="rejectRequest(reg)" *ngIf="!allAccRejUsernamesEmails.includes(reg.user.username) || !allAccRejUsernamesEmails.includes(reg.user.email)" name="btn"  class="btn btn-primary">
+                        Odbij zahtev
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="section">
+        <div class="section-content">
+          <div class="row">
+            <div class="carousel-heading">
+              <hr>
+              <h1 class="heading-carousel" id="preg-section">Zahtevi za preglede</h1>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="table-responsive">
+              <table class="table table-hover table-striped" >
+                <thead>
+                  <tr>
+                    <th scope="col" >Naziv</th>
+                    <th scope="col" >Cena</th>
+                    <th scope="col" >Trajanje</th>
+                    <th scope="col" >Status</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let reg of allPregledi">
+                    
+                    <td>
+                        {{reg.pregled.name}}
+                      
+                    </td>
+                    <td>
+                      {{reg.pregled.price}}
+                    </td>
+                    <td>
+                      {{reg.pregled.duration}}
+                    </td>
+                    <td>
+                      {{reg.status}}
+                    </td>
+                    <td>
+                      <button type="submit" *ngIf="!allAccRejPregledi.includes(reg._id)"  (click)="acceptPregledRequest(reg)" name="btn"  class="btn btn-primary">
+                        Prihvati zahtev
+                      </button>
+                      <button type="submit" *ngIf="!allAccRejPregledi.includes(reg._id)" (click)="rejectRequest(reg)" name="btn"  class="btn btn-primary">
+                        Odbij zahtev
+                      </button>
+      
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="section">
+        <div class="section-content">
+          <div class="row">
+            <div class="carousel-heading">
+              <hr>
+              <h1 class="heading-carousel" id="rnl-section">Registracija novog lekara</h1>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <app-registerdoctor></app-registerdoctor>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="section">
+        <div class="section-content">
+          <div class="row">
+            <div class="carousel-heading">
+              <hr>
+              <h1 class="heading-carousel" id="spp-section">Specijalizacije i pregledi</h1>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="table-responsive">
+
+              <table class="table table-hover table-striped" >
+                <thead>
+                  <tr>
+                    <th scope="col">Specijalizacija</th>
+                    <th scope="col">
+                      <button  class="btn btn-primary"  type="button" (click)="showField()">
+                        Dodaj specijalizaciju
+                      </button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let s of allSpec;">
+                  <tr>
+                    <td >
+                      {{s.name}}
+                    </td>
+                    <td>
+                        <button class="btn btn-primary"  type="button" data-bs-toggle="collapse" data-bs-target="#colapseID1" [attr.data-bs-target]="'#colapseID'+allSpec.indexOf(s)" aria-expanded="false" aria-controls="collapseExample">
+                          Prikaži preglede
+                        </button>                        
+                    </td>
+                  </tr>
+                  <!-- spisak pregledi -->
+                  <tr>
+                    <td colspan="2">
+                      <div class="table-responsive collapse" id={{colapseID+allSpec.indexOf(s)}}>
+                        <table class="table table-hover table-striped">
+                          
+                          <thead>
+                            <th>Naziv</th>
+                            <th>Cena</th>
+                            <th>Trajanje</th>
+                            <th colspan="2">
+                              <button  class="btn btn-primary"  type="button" (click)="showFieldaddPregled()">
+                                Dodaj novi pregled
+                              </button>
+                            </th>
+                          </thead>
+                          <tbody *ngFor="let p of s.pregledi">
+                            <tr>
+                              <td>
+                                <div >
+                                  {{p.name}}
+                                </div>
+                              </td>
+                              <td>
+                                <div *ngIf="!(updatePregledmode.length!=0?updatePregledmode[sviPregledi.indexOf(p)]:false)">
+                                  {{p.price}}
+                                </div>
+                                <input type="text" *ngIf="updatePregledmode.length!=0?updatePregledmode[sviPregledi.indexOf(p)]:false" value="{{p.price}}" placeholder="{{p.price}}"  [(ngModel)]="pprice" class="form-control" id="inputpregPrice">
+                              </td>
+                              <td>
+                                <div *ngIf="!(updatePregledmode.length!=0?updatePregledmode[sviPregledi.indexOf(p)]:false)">
+                                  {{p.duration}}
+                                </div>
+                                <input type="text" *ngIf="updatePregledmode.length!=0?updatePregledmode[sviPregledi.indexOf(p)]:false" value="{{p.duration}}" placeholder="{{p.duration}}"  [(ngModel)]="pduration" class="form-control" id="inputpregPrice">
+                              </td>
+                              <td>
+                                <button  class="btn btn-primary" *ngIf="!updatePregledmode[sviPregledi.indexOf(p)]"  type="button" (click)="deletePregled(p)"> Obrisi pregled</button>
+                                <button  class="btn btn-primary" *ngIf="!updatePregledmode[sviPregledi.indexOf(p)]"  type="button" (click)="updatePregledMode(sviPregledi.indexOf(p))"> Azuriraj pregled</button>
+                              </td>
+                              <td>
+                                <button  class="btn btn-primary"  *ngIf="updatePregledmode[sviPregledi.indexOf(p)]" type="button" (click)="updatePregled(p)"> Sacuvaj</button>
+                                <button  class="btn btn-primary" *ngIf="updatePregledmode[sviPregledi.indexOf(p)]" type="button" (click)="updatePregledModeM(sviPregledi.indexOf(p))"> Otkazi</button>
+                              </td>
+                            </tr>
+                          </tbody>
+        
+                          <!-- dodavanje novog pregleda -->
+        
+                          <tbody *ngIf="showfieldaddpregled"  > 
+                            <tr>
+                              
+                                  <td>
+                                    <input type="text" [(ngModel)]="pregledname" class="form-control" placeholder="Ime pregleda" id="inputpregname">
+
+                                  </td>
+                                  <td>
+                                    <input type="text" [(ngModel)]="pregledprice" class="form-control" placeholder="Cena pregleda" id="inputpregprice">
+                                    
+                                  </td>
+                                  <td>
+
+                                    <input type="text" [(ngModel)]="pregledduration" class="form-control" placeholder="Trajanje pregleda" id="inputpregdur">
+                                  </td>
+                                  <td>
+                                    <button  class="btn btn-primary"  type="button" (click)="addPregled(s.name)">
+                                      Sacuvaj
+                                    </button>
+                                    <button  class="btn btn-primary"  type="button" (click)="showFieldaddPregled()">
+                                        Otkazi
+                                      </button>
+
+                                  </td>
+
+                                          
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tr *ngIf="showfield">
+                  <td>
+                      
+                        <input type="text" [(ngModel)]="specName" class="form-control" placeholder="Ime specijalizacije" id="inputspecname">
+                      
+                  </td>
+                  <td>
+                    
+                      <button  class="btn btn-primary"  type="button" (click)="addSpec()">
+                        Sacuvaj
+                      </button>
+                        
+                    
+                      <button  class="btn btn-primary"  type="button" (click)="showField()">
+                          Otkazi
+                        </button>
+                    
+                  </td>           
+                </tr>
+                <!-- dodavanje nove specijalizacije -->
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-muted">© Elektrotehnički fakultet u Beogradu</span>
+      </div>
+    </footer>
+  </body>
+</html>
